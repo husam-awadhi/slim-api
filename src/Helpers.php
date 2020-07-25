@@ -22,13 +22,23 @@ class Helpers {
      */
     static public function dd($args)
     {
+        Helpers::d($args);
+        die;
+    }
+    
+    /**
+     * 
+     * 
+     */
+    static public function d($args)
+    {
         $e = new Exception();
         echo '============================================================'.PHP_EOL;
         echo $e->getTraceAsString().PHP_EOL;
         echo '============================================================'.PHP_EOL;
-        die(var_dump($args));
+        var_dump($args);
     }
-
+    
     /**
      * 
      * 
