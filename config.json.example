@@ -1,0 +1,19 @@
+{
+    "name": "juris/gitpack",
+    "type": "project",
+    "description": "Gitpack App",
+    "keywords": [
+        "gitpack",
+        "juris"
+    ],
+    "config": {
+        "prod": true,
+        "dir": {
+            "apache": "/vaw/www/html",
+            "gitpack": "/usr/local/bin/gitpack"
+        },
+        "debug": true,
+        "log": true,
+        "other_option": "value"
+    }
+}

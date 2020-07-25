@@ -1,0 +1,27 @@
+{
+    "name": "juris/gitpack",
+    "type": "project",
+    "description": "Gitpack App",
+    "keywords": [
+        "gitpack",
+        "juris"
+    ],
+    "require": {
+        "monolog/monolog": "1.25.5",
+        "slim/slim": "2.6.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "8.5.8"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "App\\": "src/"
+        }
+    }
+}
