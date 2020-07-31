@@ -7,10 +7,13 @@
         "juris"
     ],
     "config": {
-        "prod": true,
+        "prod": false,
         "dir": {
             "apache": "/vaw/www/html",
             "gitpack": "/usr/local/bin/gitpack"
+        },
+        "slim": {
+            "mode": "development"
         },
         "debug": true,
         "log": true,

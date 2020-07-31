@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 /**
  * 
  */
@@ -14,8 +15,9 @@ use Monolog\Handler\StreamHandler;
  * 
  * 
  */
-class Helpers {
-    
+class Helpers
+{
+
     /**
      * 
      * 
@@ -25,7 +27,7 @@ class Helpers {
         Helpers::d($args);
         die;
     }
-    
+
     /**
      * 
      * 
@@ -33,12 +35,21 @@ class Helpers {
     static public function d($args)
     {
         $e = new Exception();
-        echo '============================================================'.PHP_EOL;
-        echo $e->getTraceAsString().PHP_EOL;
-        echo '============================================================'.PHP_EOL;
+        echo '============================================================' . PHP_EOL;
+        echo $e->getTraceAsString() . PHP_EOL;
+        echo '============================================================' . PHP_EOL;
         var_dump($args);
     }
-    
+
+    /**
+     * 
+     * 
+     */
+    public function write($msg, $level)
+    {
+        Helpers::log("[SLIM] [$level] $msg", 'info');
+    }
+
     /**
      * 
      * 
@@ -47,15 +58,15 @@ class Helpers {
     {
         $logger = Helpers::getLogger();
 
-        switch(strtoupper($type)){
+        switch (strtoupper($type)) {
             case "WARNING":
                 $func = 'warning';
-            break;
+                break;
             case "ERROR":
                 $func = 'error';
-            break;
+                break;
             default:
-            $func = 'info';
+                $func = 'info';
         }
 
         $logger->$func($msg);
@@ -65,16 +76,32 @@ class Helpers {
      * 
      * 
      */
-    static function getLogger()
+    static public function getLogger($name = 'app')
     {
         static $logger;
 
-        if(!$logger){
-            $logger = new Logger('app');
-            $logger->pushHandler(new StreamHandler(LOG.'/app-loggs'.date('Ymd').'.log', Logger::DEBUG));
+        if (!$logger && Config::getValue("log")) {
+            $logger = new Logger($name);
+            $logger->pushHandler(new StreamHandler(LOG . '/' . $name . '-logs-' . date('Ymd') . '.log', Logger::DEBUG));
         }
 
         return $logger;
     }
 
+    /**
+     * 
+     * 
+     */
+    static public function toOneDimension($array = array(), $nested_key = false, array $final = array())
+    {
+
+        foreach ($array as $key => $element) {
+
+            $full_key = ($nested_key === false ? '' : $nested_key . '.') . $key;
+            if (!is_array($array[$key])) $final[$full_key] = $element;
+            else $final = array_merge($final, Helpers::toOneDimension($array[$key], $full_key, $final));
+        }
+
+        return $final;
+    }
 }

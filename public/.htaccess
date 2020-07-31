@@ -1,21 +1,14 @@
-<IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
+# For production, put your rewrite rules directly into your VirtualHost
+# directive and turn off AllowOverride.
 
+<IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    RewriteCond %{REQUEST_FILENAME} index.php
+    RewriteRule ^.*$ - [NC,L]
 
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
 
-    # Send Requests To Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+    RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
+    RewriteRule ^(.*) - [E=BASE:%1]
+    RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]
 </IfModule>

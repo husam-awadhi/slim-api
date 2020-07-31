@@ -1,13 +1,15 @@
 {
     "name": "juris/gitpack",
     "type": "project",
-    "description": "Gitpack App",
+    "description": "Gitpack App (PHP 5.3.2)",
     "keywords": [
         "gitpack",
         "juris"
     ],
+
     "require": {
         "monolog/monolog": "1.25.5",
+        "respect/validation": "^0.9.8",
         "slim/slim": "2.6.3"
     },
     "require-dev": {

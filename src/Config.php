@@ -1,7 +1,9 @@
-<?php 
+<?php
+
 /**
  * 
  */
+
 namespace App;
 
 use App\Helpers;
@@ -13,20 +15,27 @@ use App\Helpers;
  * 
  * 
  */
-class Config {
+class Config
+{
+
+    const DEFAULT = "this ain't it chief";
+    const CONFIG_FILE = ROOT . "/config.json";
 
     /**
      * 
      * 
      */
-    static private function loadConfig()
+    static private function loadConfig($format = true)
     {
         static $config;
 
-        if(!$config) {
-            $config = json_decode(file_get_contents(ROOT.'/config.json'), true);
+        if (!$config) {
+            $config = json_decode(file_get_contents(Config::CONFIG_FILE), true);
         }
-        if(!$config) Helpers::log("Error loading config file. please check if file exist and if it's a valid json file","ERROR");
+        if ($format) $config['config'] = Helpers::toOneDimension($config['config']);
+
+
+        if (!$config) Helpers::log("Error loading config file. please check if file exist and if it's a valid json file", "ERROR");
 
         return $config;
     }
@@ -35,13 +44,14 @@ class Config {
      * 
      * 
      */
-    static public function getValue($key){
-        
-        $config = Config::loadConfig();
-        
-        return isset($config['config'][$key]) ? $config['config'][$key] : "this ain't it chief"; 
-    }
+    static public function getValue($key = null)
+    {
 
-    //
-    
+        $config = Config::loadConfig();
+
+        $value = ($key !== null) ? (isset($config['config'][$key]) ? $config['config'][$key] : Config::
+        DEFAULT) : $config['config'];
+
+        return $value;
+    }
 }

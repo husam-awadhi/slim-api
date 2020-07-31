@@ -1,13 +1,25 @@
-<?php 
-
+<?php
 /**
  * gitpack API - A Slim PHP api
  *
  * @package  gitpack
- * @author   Gamma Squad
+ * @author   Husam A.
  */
 
+declare(strict_types=1);
+
 define('GITPACK_START', microtime(true));
+
+/*
+|--------------------------------------------------------------------------
+| Load Constants
+|--------------------------------------------------------------------------
+|
+| Default values that can be used throughout the app
+| a way to make our life easier.
+|
+*/
+require __DIR__ . '/../constants.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -20,20 +32,8 @@ define('GITPACK_START', microtime(true));
 | loading any of our classes later on. It feels great to relax.
 |
 */
+require ROOT . '/vendor/autoload.php';
 
-require __DIR__.'/../vendor/autoload.php';
-
-/*
-|--------------------------------------------------------------------------
-| Load Constants
-|--------------------------------------------------------------------------
-|
-| Default values that can be used throughout the app
-| a way to make our life easier.
-|
-*/
-
-require_once __DIR__.'/../constants.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -41,15 +41,16 @@ require_once __DIR__.'/../constants.php';
 |--------------------------------------------------------------------------
 |
 | Once Slim is running, we can recieve requests and response to 
-| the client's browser. 
+| the client's browser. slim settings are configered in.
+| DOCS. https://docs.slimframework.com/ 
 |
 */
+$settings = require API . '/Settings.php';
 
-//
+$app = new \Slim\Slim($settings);
 
+// Register routes
+require API . '/Routes.php';
 
-// App\Helpers::log('prod: '. App\Config::getValue('prod'), 'error');
-// App\Helpers::log('prod: '. App\Config::getValue('prod'), 'warning');
-// App\Helpers::log('prod: '. App\Config::getValue('prod'), 'something random');
-// echo App\Config::getValue('prod');
-
+// Run! *beats drop*
+$app->run();
