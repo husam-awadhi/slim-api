@@ -6,7 +6,6 @@
         "gitpack",
         "juris"
     ],
-
     "require": {
         "monolog/monolog": "1.25.5",
         "respect/validation": "^0.9.8",

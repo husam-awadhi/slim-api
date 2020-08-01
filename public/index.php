@@ -49,8 +49,6 @@ $settings = require API . '/Settings.php';
 
 $app = new \Slim\Slim($settings);
 
-// Register routes
 require API . '/Routes.php';
 
-// Run! *beats drop*
-$app->run();
+$app->run(); // Run! *beat drop*

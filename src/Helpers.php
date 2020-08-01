@@ -24,7 +24,7 @@ class Helpers
      */
     static public function dd($args)
     {
-        Helpers::d($args);
+        self::d($args);
         die;
     }
 
@@ -47,7 +47,7 @@ class Helpers
      */
     public function write($msg, $level)
     {
-        Helpers::log("[SLIM] [$level] $msg", 'info');
+        self::log("[SLIM] [$level] $msg", 'info');
     }
 
     /**
@@ -56,7 +56,7 @@ class Helpers
      */
     static public function log($msg, $type)
     {
-        $logger = Helpers::getLogger();
+        $logger = self::getLogger();
 
         switch (strtoupper($type)) {
             case "WARNING":
@@ -99,7 +99,7 @@ class Helpers
 
             $full_key = ($nested_key === false ? '' : $nested_key . '.') . $key;
             if (!is_array($array[$key])) $final[$full_key] = $element;
-            else $final = array_merge($final, Helpers::toOneDimension($array[$key], $full_key, $final));
+            else $final = array_merge($final, self::toOneDimension($array[$key], $full_key, $final));
         }
 
         return $final;

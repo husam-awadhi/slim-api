@@ -95,7 +95,7 @@ abstract class Controller implements ControllerInterface
     public function _log($msg, $type)
     {
         Helpers::log(
-            "[/SLIM/]" ." [{$this->request->getMethod()}] " .
+            "[/SLIM/]" ."[{$this->request->getMethod()}] " .
                 get_called_class() .
                 " [BODY] " . $this->request->getBody() .
                 " [MSG] " . $msg,
