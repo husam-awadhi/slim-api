@@ -1,7 +1,5 @@
 <?php 
 /** 
- * juris tech. 2020. 
- * GAMMA SQUAD - ACES
  * 
  * 
  * 
