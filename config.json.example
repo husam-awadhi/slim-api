@@ -1,10 +1,10 @@
 {
-    "name": "juris/gitpack",
+    "name": "husam/gitpack",
     "type": "project",
     "description": "Gitpack App",
     "keywords": [
         "gitpack",
-        "juris"
+        "husam"
     ],
     "config": {
         "prod": false,
